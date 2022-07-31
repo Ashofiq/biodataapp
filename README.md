@@ -35,7 +35,7 @@ if you update documentation then run this command
                     /UserController.php
 
 ## Issues
-If you come across any issues please report them https://github.com/Ashofiq/laravel-api-boilerplate/issues.
+If you come across any issues please report them https://github.com/Ashofiq/biodataapp/issues.
 
 ## Contributing
 Thank you for considering contributing to the Laravel Boilerplate project! Please feel free to make any pull requests, or e-mail me a feature request you would like to see in the future to Ahmad Shafik at ahmadshofiq3@gmail.com.

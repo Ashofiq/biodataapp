@@ -66,15 +66,13 @@
           <!-- Page title -->
          
         </div>
-        <div class="page-body">
-          <div class="container-xl">
-            <div class="row row-deck row-cards">
-              
+        <router-view></router-view>
+        
 
-                <router-view></router-view>
-            </div>
-          </div>
-        </div>
+     
+
+
+      </div>
         <footer class="footer footer-transparent d-print-none">
           <div class="container-xl">
             <div class="row text-center align-items-center flex-row-reverse">
