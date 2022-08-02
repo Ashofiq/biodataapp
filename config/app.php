@@ -197,7 +197,8 @@ return [
 
         // repositories
         App\Repositories\Biodata\BiodataRepoServiceProvide::class,
-
+        App\Repositories\EducationalInfo\EducationalInfoRepoServiceProvide::class,
+        App\Repositories\FamilyInfo\FamilyInfoRepoServiceProvide::class,
 
     ],
 

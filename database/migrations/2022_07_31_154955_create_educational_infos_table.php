@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('educational_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('biodataId');
+            $table->unsignedBigInteger('biodataId')->nullable();
             $table->foreign('biodataId')->references('id')->on('biodatas')->onDelete('cascade');
-            $table->text('institute');
-            $table->string('passingYear');
-            $table->string('result');
-            $table->string('outOf');
+            $table->text('institute')->nullable();
+            $table->string('passingYear')->nullable();
+            $table->string('result')->nullable();
+            $table->string('outOf')->nullable();
             $table->timestamps();
         });
     }

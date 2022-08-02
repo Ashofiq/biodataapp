@@ -18,7 +18,7 @@
             <div class="row row-cards">
                 <div class="col-6">
 
-                    <form @submit.prevent="saveBiodata" enctype="multipart/form-data">
+                    <form @submit.prevent="biodataUpdate" enctype="multipart/form-data">
                         <div class="card-header">
                             <h4 class="card-title">Add Biodata</h4>
                         </div>
@@ -109,7 +109,7 @@
                                                 <input type="text" class="form-control" v-model="form.hobbie" name="hobbie" >
                                             </div>
 
-                                            <div class="custom-file mb-3">
+                                             <div class="custom-file mb-3">
                                                 <input type="file" class="custom-file-input" id="customFile" @change="onFileSelected">
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
@@ -117,14 +117,13 @@
                                             <div class="mb-3">
                                                 <div class="custom-file col-md-6">
                                                     <img :src="form.photo" class="avatar avatar-xl mb-3 avatar-rounded">
+
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
-                                  
-                                
 
                             </div>
                         </div>
@@ -222,14 +221,23 @@
     </div>
 </template>
 
-
 <script>
     
   export default {
     created(){
-    //   if (true) {
-    //     this.$router.push({name: '/'})
-    //   }
+
+        let id = this.$route.params.id;
+
+        axios.get('/api/biodata/'+id)
+        .then((data) =>  {
+            this.form = data.data.data;
+            this.form.newphoto = data.data.data.user_photo
+            this.form.photo = import.meta.env.VITE_APP_BASE_URL+ 'storage/images/' + data.data.data.photo
+            this.familyForms = data.data.data.family;
+            this.educationalForms = data.data.data.education;
+            console.log(process.env.VUE_APP_BASE_URL);
+        })
+        .catch(error => console.log('error', error))
     },
     data() {
       return {
@@ -241,9 +249,10 @@
           contackNo: null,
           dob: null,
           gender: null,
-          height: null,
+          height: null, 
           weight: null,
           religion: null,
+          newphoto: null,
           presantAddress: null,
           permanentAddress: null,
           hobbie :null,
@@ -265,6 +274,7 @@
       }
     },
 
+
     methods:{
       onFileSelected(event){
 
@@ -275,7 +285,7 @@
         }else{
           let render = new FileReader();
           render.onload = event => {
-            this.form.photo = event.target.result
+            this.form.newphoto = event.target.result
           };
 
           render.readAsDataURL(file)
@@ -284,72 +294,25 @@
         
       },
 
-      saveBiodata(){
-        console.log(this.educationalForms);
+      biodataUpdate(){
+         let id = this.$route.params.id;
         this.form.educationalForms = this.educationalForms;
         this.form.familyForms = this.familyForms;
-
-         axios.post('/api/biodata/create', this.form)
+         axios.post('/api/biodata/'+ id, this.form)
           .then(response1 =>{ 
             console.log(response1); 
-            Notification.success('Successfully create');
+            Notification.success('Successfully Update');
 
-            this.$router.push({name: 'home'})
+            this.$router.push({name: 'list'})
           })
           .catch(error =>
             this.errors = error.response.data.errors
             
           )
-      },
-
-        checkPhoneNumber(event){
-            const value = event.target.value
-            if (value.length > 11) {
-                this.errors.phone = 'phone';
-            }
-            console.log(value.length);
-        },
-
-        addNewEducationRow() {
-            console.log('dd');
-            this.educationalForms.push({
-                institute: null,
-                passingYear: null,
-                result: null,
-                outOf: null
-            });
-        },
-        deleteEducationalRow(index, educationalForm) {
-            var idx = this.educationalForms.indexOf(educationalForm);
-            console.log(idx, index);
-            if (idx > -1) {
-                this.educationalForms.splice(idx, 1);
-            }
-        },
-
-        addNewFamilyRow() {
-            this.familyForms.push({
-                relation: null,
-                name : null,
-                ocupation: null
-            });
-        },
-
-        deleteFamilyRow(index, familyForm) {
-            var idx = this.familyForms.indexOf(familyForm);
-            console.log(idx, index);
-            if (idx > -1) {
-                this.familyForms.splice(idx, 1);
-            }
-        },
+      }
     }
-
-    
-
-    
   }
 </script>
-
 
 <style scoped>
 .educationInput {

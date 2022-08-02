@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('family_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('biodataId');
+            $table->unsignedBigInteger('biodataId')->nullable();
             $table->foreign('biodataId')->references('id')->on('biodatas')->onDelete('cascade');
-            $table->string('relation');
-            $table->string('name');
-            $table->string('ocupation');
+            $table->string('relation')->nullable();
+            $table->string('name')->nullable();
+            $table->string('ocupation')->nullable();
             $table->timestamps();
         });
     }

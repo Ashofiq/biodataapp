@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('presantAddress')->nullable();
             $table->text('permanentAddress')->nullable();
             $table->text('hobbie')->nullable();
+            $table->text('photo')->default('');
             $table->timestamps();
         });
     }
