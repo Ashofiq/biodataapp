@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Biodata\FamilyInfo;
 use App\Models\Biodata\EducationalInfo;
-use Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Biodata extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
 
     public function family()
     {

@@ -43,12 +43,28 @@ class BiodataRepository implements BiodataInterface
         $biodata->permanentAddress = $request->permanentAddress;
         $biodata->hobbie = $request->hobbie;
         $biodata->photo = $fileName;
+        $biodata->skills = $this->getSkills($request->skills);
 
         if ($biodata->save()) {
             return $biodata;
         }
 
         return false;
+    }
+
+    public function getSkills($skills)
+    {   
+        if (COUNT($skills) == 0) {
+            return '';
+        }
+
+        $data = '';
+        foreach ($skills as $key => $value) {
+            if ($value['selected']) {
+                $data .= $value['name'].',';
+            }
+        }
+        return substr($data, 0, -1);
     }
 
     public function list(){
@@ -58,7 +74,7 @@ class BiodataRepository implements BiodataInterface
     public function deleteData($id){
         $biodata = $this->biodata->find($id);
         if ($biodata) {
-            Storage::disk('local')->delete('images/',$biodata->biodata);
+            Storage::disk('local')->delete('public/images/'.$biodata->photo);
             $biodata->delete();
             return true;
         }
@@ -76,17 +92,22 @@ class BiodataRepository implements BiodataInterface
     }
 
     public function updateData($request, $id){
-        // $fileName = '';
-        // if ($request->photo) {
-        //     $image      = $request->file('photo');
-        //     $fileName   = time() . '.png';
-
-        //     $img = Image::make($request->photo)->resize(240, 200);
-        //     $img->stream(); 
-        //     Storage::disk('local')->put('public/images'.'/'.$fileName, $img, 'public');
-        // }
-
+        
         $biodata = $this->biodata->find($id);
+
+        $fileName = '';
+        if ($request->newphoto) {
+            $image      = $request->file('newphoto');
+            $fileName   = time() . '.png';
+
+            $img = Image::make($request->newphoto)->resize(240, 200);
+            $img->stream(); 
+            Storage::disk('local')->put('public/images'.'/'.$fileName, $img, 'public');
+
+            // delete old photo
+            Storage::disk('local')->delete('public/images/'.$biodata->photo);
+        }
+
         $biodata->name = $request->name;
         $biodata->nickname = $request->nickname;
         $biodata->email = $request->email;
@@ -100,7 +121,11 @@ class BiodataRepository implements BiodataInterface
         $biodata->presantAddress = $request->presantAddress;
         $biodata->permanentAddress = $request->permanentAddress;
         $biodata->hobbie = $request->hobbie;
-        // $biodata->photo = $fileName;
+        $biodata->skills = $this->getSkills($request->skills);
+
+        if ($fileName != '') {
+            $biodata->photo = $fileName;
+        }
 
         if ($biodata->save()) {
             return $biodata;

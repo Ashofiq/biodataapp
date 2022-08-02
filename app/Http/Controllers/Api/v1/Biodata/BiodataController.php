@@ -31,11 +31,12 @@ class BiodataController extends Controller
 
     public function saveBiodata(Request $request)
     {       
+       
         $validationData = $request->validate([
             'name' => 'required',
             'nickname' => 'required',
             'email' => 'required|unique:biodatas',
-            'phone' => 'required|min:11'
+            // 'phone' => 'required|min:11'
         ]);
 
         $final = $this->biodata->saveData($request);

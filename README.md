@@ -4,10 +4,10 @@
 This is Simple CURD Operation with laravel api and vue js, vite config .
 
 ## Features
-
-    * Swegger
+    * Api
     * Api Vertioning 
     * Repository Peterrn
+    
 
 ## Installation process
 
@@ -15,14 +15,7 @@ This is Simple CURD Operation with laravel api and vue js, vite config .
 - .env.example edit to .env
 - .env file set database connection credantial
 - php artisan migrate
-
-## API Documentation
-
-We use Swegger for Api Documentation, for more https://github.com/DarkaOnLine/L5-Swagger
-
-if you update documentation then run this command 
-
-    - php artisan l5-swagger:generate    
+   
 
 ### versioning Folder Structure
 

@@ -1,140 +1,135 @@
 <template>
-
-    <div class="container-xl">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">
-                        Add Biodata
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="page-body">
         <div class="container-xl">
             <div class="row row-cards">
-                <div class="col-6">
-
-                    <form @submit.prevent="saveBiodata" enctype="multipart/form-data">
+                <div class="col-md-6">
+                    <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Add Biodata</h4>
                         </div>
                         <div class="card-body">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-12">
-                                    <div class="row">
-                                        <div class="col-md-6 col-xl-12">
-                                        
-                                            <div class="mb-3">
-                                                <label class="form-label required">Name</label>
-                                                <input type="text" class="form-control" v-model="form.name"  name="name" placeholder="Input  name" required>
-                                                <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
+                             <form @submit.prevent="saveBiodata" enctype="multipart/form-data">
+                         
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-xl-12">
+                                            
+                                                <div class="mb-3">
+                                                    <label class="form-label required">Name</label>
+                                                    <input type="text" class="form-control" v-model="form.name"  name="name" placeholder="Input  name" required>
+                                                    <small class="text-danger" v-if="errors.name">{{ errors.name[0] }}</small>
 
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label required">Nickname</label>
-                                                <input type="text" v-model="form.nickname" class="form-control" name="nickname" placeholder="Input nickname" >
-                                                <small class="text-danger" v-if="errors.nickname">{{ errors.nickname[0] }}</small>
-
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label required">Email</label>
-                                                <input type="text" v-model="form.email" class="form-control" name="email" placeholder="Enter email" >
-                                                <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label required">phone</label>
-                                                <input type="text" v-model="form.phone" @keyup="checkPhoneNumber"  class="form-control" name="phone" placeholder="Enter phone" >
-                                                <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
-
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Contact No</label>
-                                                <input type="text" v-model="form.contactNo" class="form-control" name="contactNo" placeholder="Enter Contact No">
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Date Of Birth</label>
-                                                <input type="date" name="dob"  v-model="form.dob" class="form-control">
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <div class="form-label">Gender</div>
-                                                <select class="form-select" name="gender" v-model="form.gender">
-                                                    <option disabled selected>Select Gender</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <div class="form-label">Religion</div>
-                                                <select class="form-select" name="religion" v-model="form.religion">
-                                                    <option disabled selected>Select Religion</option>
-                                                    <option value="Islam">Islam</option>
-                                                    <option value="Hindu">Hindu</option>
-                                                    <option value="Cristian">Cristian</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Height</label>
-                                                <input type="text" class="form-control" v-model="form.height" name="height" >
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Height</label>
-                                                <input type="text" class="form-control" v-model="form.weight" name="weight" >
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Presant Address</label>
-                                                <input type="text" class="form-control" v-model="form.presantAddress" name="presantAddress" >
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Permanent Address</label>
-                                                <input type="text" class="form-control" v-model="form.permanentAddress" name="permanentAddress" >
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label class="form-label">Hobbies</label>
-                                                <input type="text" class="form-control" v-model="form.hobbie" name="hobbie" >
-                                            </div>
-
-                                            <div class="custom-file mb-3">
-                                                <input type="file" class="custom-file-input" id="customFile" @change="onFileSelected">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <div class="custom-file col-md-6">
-                                                    <img :src="form.photo" class="avatar avatar-xl mb-3 avatar-rounded">
                                                 </div>
-                                            </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label required">Nickname</label>
+                                                    <input type="text" v-model="form.nickname" class="form-control" name="nickname" placeholder="Input nickname" >
+                                                    <small class="text-danger" v-if="errors.nickname">{{ errors.nickname[0] }}</small>
 
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label required">Email</label>
+                                                    <input type="text" v-model="form.email" class="form-control" name="email" placeholder="Enter email" >
+                                                    <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label required">phone</label>
+                                                    <input type="text" v-model.number="form.phone" class="form-control" name="phone" placeholder="Enter phone" >
+                                                    <small class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</small>
+
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Contact No</label>
+                                                    <input type="text" v-model="form.contactNo" class="form-control" name="contactNo" placeholder="Enter Contact No">
+
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Date Of Birth</label>
+                                                    <input type="date" name="dob"  v-model="form.dob" class="form-control">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <div class="form-label">Gender</div>
+                                                    <label v-for="(gender, m) in genders" :key="m">
+                                                        <input type="radio" v-model="form.gender" :value="gender.name"> {{gender.name}}
+                                                    </label>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <div class="form-label">Skills</div>
+                                                    <ul>
+                                                        <li v-for="(skill, m) in form.skills" :key="m">
+                                                            <input type="checkbox" v-model="skill.selected" :value="skill.name"> {{skill.name}}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <div class="form-label">Religion</div>
+                                                    <select class="form-select" name="religion" v-model="form.religion">
+                                                        <option disabled selected>Select Religion</option>
+                                                        <option value="Islam">Islam</option>
+                                                        <option value="Hindu">Hindu</option>
+                                                        <option value="Cristian">Cristian</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Height</label>
+                                                    <input type="text" class="form-control" v-model="form.height" name="height" >
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Height</label>
+                                                    <input type="text" class="form-control" v-model="form.weight" name="weight" >
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Presant Address</label>
+                                                    <input type="text" class="form-control" v-model="form.presantAddress" name="presantAddress" >
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Permanent Address</label>
+                                                    <input type="text" class="form-control" v-model="form.permanentAddress" name="permanentAddress" >
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Hobbies</label>
+                                                    <input type="text" class="form-control" v-model="form.hobbie" name="hobbie" >
+                                                </div>
+
+                                                <div class="custom-file mb-3">
+                                                    <input type="file" class="custom-file-input" id="customFile" @change="onFileSelected">
+                                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <div class="custom-file col-md-6">
+                                                        <img :src="form.photo" class="avatar avatar-xl mb-3 avatar-rounded">
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                  
-                                
+                                    
+                                    
 
-                            </div>
+                                </div>
+                             <button type="submit" class="btn btn-primary ms-auto">Save Biodata</button>
+
+                            </form>
+                        
                         </div>
-                        <div class="card-footer text-end">
-                            <div class="d-flex">
-                                <button type="submit" class="btn btn-primary ms-auto">Save Company</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
+
+                
 
                     <div class="col-md-6">
                         <div class="card">
@@ -224,13 +219,10 @@
 
 
 <script>
-    
+   
+
   export default {
-    created(){
-    //   if (true) {
-    //     this.$router.push({name: '/'})
-    //   }
-    },
+   
     data() {
       return {
         form: {
@@ -242,6 +234,14 @@
           dob: null,
           gender: null,
           height: null,
+          skills: [
+            {name: 'Laravel', selected: true}, 
+            {name: 'Api', selected: false},
+            {name: 'Codeigniter', selected: false},
+            {name: 'Ajax', selected: false},
+            {name: 'Vue js', selected: false},
+            {name: 'Mysql', selected: false},
+        ],
           weight: null,
           religion: null,
           presantAddress: null,
@@ -250,6 +250,8 @@
           educationalForms : null,
           familyForms : null
         },
+        genders: [{name: 'Male', selected: true}, {name: 'Female', selected: false}],
+        
         educationalForms: [{
             institute: null,
             passingYear: null,
@@ -266,48 +268,35 @@
     },
 
     methods:{
-      onFileSelected(event){
+        onFileSelected(event){
 
-        const file = event.target.files[0]
-        console.log(file.size);
-        if (file.size > 1048770) {
-          Notification.warning('Image Less then 1 MB')
-        }else{
-          let render = new FileReader();
-          render.onload = event => {
-            this.form.photo = event.target.result
-          };
-
-          render.readAsDataURL(file)
-        }
-
-        
-      },
-
-      saveBiodata(){
-        console.log(this.educationalForms);
-        this.form.educationalForms = this.educationalForms;
-        this.form.familyForms = this.familyForms;
-
-         axios.post('/api/biodata/create', this.form)
-          .then(response1 =>{ 
-            console.log(response1); 
-            Notification.success('Successfully create');
-
-            this.$router.push({name: 'home'})
-          })
-          .catch(error =>
-            this.errors = error.response.data.errors
-            
-          )
-      },
-
-        checkPhoneNumber(event){
-            const value = event.target.value
-            if (value.length > 11) {
-                this.errors.phone = 'phone';
+            const file = event.target.files[0]
+            console.log(file.size);
+            if (file.size > 1048770) {
+                Notification.warning('Image Less then 1 MB')
+            }else{
+                let render = new FileReader();
+                render.onload = event => {
+                    this.form.photo = event.target.result
+                };
+                render.readAsDataURL(file)
             }
-            console.log(value.length);
+        },
+
+        saveBiodata(){
+            this.form.educationalForms = this.educationalForms;
+            this.form.familyForms = this.familyForms;
+
+            axios.post('/api/biodata/create', this.form)
+            .then(response1 =>{ 
+                console.log(response1); 
+                Notification.success('Successfully create');
+
+                this.$router.push({name: 'home'})
+            })
+            .catch(error =>
+                this.errors = error.response.data.errors
+            )
         },
 
         addNewEducationRow() {
@@ -343,10 +332,6 @@
             }
         },
     }
-
-    
-
-    
   }
 </script>
 
