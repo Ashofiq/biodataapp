@@ -15,6 +15,9 @@ This is Simple CURD Operation with laravel api and vue js, vite config .
 - .env.example edit to .env
 - .env file set database connection credantial
 - php artisan migrate
+- npm i 
+- npm run dev
+- php artisan serve
    
 
 ### versioning Folder Structure
