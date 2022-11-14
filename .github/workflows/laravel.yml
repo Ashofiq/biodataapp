@@ -13,4 +13,4 @@ jobs:
       with:
         server: myseokits.com
         username: vue@vue.myseokits.com
-        password: vue.myseokits.com
+        password:
